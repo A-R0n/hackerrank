@@ -6,12 +6,12 @@
 // the mouse will be allowed to move and it will escape while they fight.
 function catAndMouse(cat1, cat2, mouse) {
     if (Math.abs(mouse-cat1) == Math.abs(mouse-cat2)) {
-        return 'Mouse C';
+        return 'Mouse';
     }
     else if (Math.abs(cat2 - mouse) > Math.abs(cat1 - mouse)) {
-        return 'Cat A';
+        return 'Cat 1';
     }
     else {
-        return 'Cat B';
+        return 'Cat 2';
     }
 }
