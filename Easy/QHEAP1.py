@@ -21,9 +21,27 @@
 
 # For each query of type 3, print the minimum value on a single line.
 import heapq
+import numpy as np
+from typing import List
+from time import perf_counter
 my_heap = []
 elems_to_delete = set()
 ERROR_MESSAGE = 'unknown query type'
+ARRAY_SIZE = 1000000
+RANDOM_INT_MAX = ARRAY_SIZE
+
+def array_random_ints() -> np.ndarray:
+    return np.random.randint(RANDOM_INT_MAX, size=ARRAY_SIZE)
+
+def ndarray_to_list(l: np.ndarray) -> List[int]:
+    return list(l)
+
+def heapify_array(arr: np.ndarray):
+    s = perf_counter()
+    heapq.heapify(arr)
+    e = perf_counter()
+    total_time = e-s
+    print(f'time to complete: {total_time} seconds!')
 
 def format_as_list() -> list:
     return list(map(int,input().split()))
@@ -55,9 +73,11 @@ def qheap1():
         stdin_list = format_as_list()
         query_type = stdin_list[0]
         if query_type == 1:
-            add_elem_to_heap(stdin_list[1])
+            elem = stdin_list[1]
+            add_elem_to_heap(elem)
         elif query_type==2:
-            add_elem_to_delete_from_heap(stdin_list[1])
+            elem = stdin_list[1]
+            add_elem_to_delete_from_heap(elem)
         elif query_type==3:
             # delete all the item that will be present in the set.
             while my_heap[0] in elems_to_delete:
@@ -67,5 +87,12 @@ def qheap1():
         else:
             print_error()
 
+def test_BigO():
+    ## this should be O(N log n)
+    l0 = array_random_ints()
+    l1 = ndarray_to_list(l0)
+    heapify_array(l1)
+
 if __name__ == '__main__':
+    # test_BigO()
     qheap1()
